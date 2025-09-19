@@ -14,6 +14,9 @@
           <a class="nav-link" href="/showproduct">Show Product</a>
         </li>
         <li class="nav-item">
+          <a class="nav-link" href="/product">Product</a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link" href="/customer">Customer</a>
         </li>
         <li class="nav-item dropdown">
