@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 26, 2025 at 07:57 PM
+-- Generation Time: Oct 03, 2025 at 08:21 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -112,11 +112,12 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`product_id`, `product_name`, `description`, `price`, `image`, `stock`, `created_at`) VALUES
-(1, 'เสื้อยืดคอกลม', 'เสื้อยืดผ้าฝ้าย 100% สวมใส่สบาย', '199.00', '1758306196_tshirts.jpg', 50, '2025-09-19 18:23:16'),
-(2, 'กางเกงยีนส์', 'กางเกงยีนส์ทรงกระบอก สีฟ้าอ่อน', '799.00', '1758306330_jeans.jpg', 30, '2025-09-19 18:25:30'),
-(3, 'Air Jordan 1 Low x Travis Scott \"Medium Olive\"', 'ใส่แล้วโคตรหล่อ ลุคดารา', '24000.00', '1758306564_sneakers.jpg', 2, '2025-09-19 18:29:24'),
-(4, 'spu', 'spu', '299.00', '1758305887_unnamed.png', 200, '2025-09-19 18:18:07'),
-(5, 'spu', 'spu', '299.00', '1758305950_unnamed.jpg', 22, '2025-09-19 18:19:10');
+(12, ' Jordan 1 Retro Low OG SP Fragment x Travis Scott', 'Jordan  DM7866-140', '42000.00', '1759509661_jordan-1-low-fragment-design-x-travis-scott-1.jpg', 20, '2025-10-03 16:41:01'),
+(13, 'Jordan 1 Retro Low OG SP Travis Scott Medium Olive', 'Jordan DM7866-200', '15000.00', '1759509746_jordan-1-low-og-sp-x-travis-scott-medium-olive-1.jpg', 20, '2025-10-03 16:42:26'),
+(15, ' Jordan 1 Retro Low OG SP Travis Scott Black Phantom', ' Jordan DM7866-001', '18500.00', '1759514070_jordan-1-retro-low-og-sp-travis-scott-black-phantom-1.jpg', 20, '2025-10-03 17:54:30'),
+(16, ' Jordan 1 Retro Low OG SP Fragment x Travis Scott Sail Military Blue', 'Jordan  DM7866-104', '77999.00', '1759514219_DM7866-104-jordan-1-retro-low-og-sp-fragment-x-travis-scott-sail-military-blue-1.jpg', 2, '2025-10-03 17:56:59'),
+(17, 'Jordan 1 Retro Low Dior', 'Jordan  CN8608-002', '110000.00', '1759514314_dior-x-air-jordan-1-low-dior-aj1-high-1.jpg', 2, '2025-10-03 17:58:34'),
+(18, ' Jordan 1 Retro Low OG SP Travis Scott Mocha', 'Jordan  CQ4277-001', '52700.00', '1759514356_air-jordan-1-retro-low-travis-scott-1.jpg', 2, '2025-10-03 17:59:16');
 
 -- --------------------------------------------------------
 
@@ -214,7 +215,7 @@ ALTER TABLE `payments`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `students`
