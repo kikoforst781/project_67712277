@@ -8,24 +8,37 @@ try {
     $method = $_SERVER['REQUEST_METHOD'];
 
     if ($method === "GET") {
-        // ✅ ดึงข้อมูลลูกค้าทั้งหมด
-        $stmt = $conn->prepare("SELECT * FROM students ORDER BY student_id DESC");
+        // ✅ ดึงข้อมูลนักเรียนทั้งหมด
+        $stmt = $conn->prepare("SELECT student_id, first_name, last_name, email, phone FROM students ORDER BY student_id ASC");
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        // ตรวจสอบว่ามีข้อมูลหรือไม่
-        if (empty($result)) {
-            echo json_encode(["success" => true, "message" => "ไม่พบข้อมูล"]);
+        echo json_encode(["success" => true, "data" => $result]);
+    }
+
+    // ✅ เพิ่มข้อมูลนักเรียน
+    elseif ($method === "POST") {
+        $data = json_decode(file_get_contents("php://input"), true);
+
+        $stmt = $conn->prepare("INSERT INTO students (first_name, last_name, email, phone) 
+                                VALUES (:first_name, :last_name, :email, :phone)");
+
+        $stmt->bindParam(":first_name", $data["first_name"]);
+        $stmt->bindParam(":last_name", $data["last_name"]);
+        $stmt->bindParam(":email", $data["email"]);
+        $stmt->bindParam(":phone", $data["phone"]);
+
+        if ($stmt->execute()) {
+            echo json_encode(["success" => true, "message" => "เพิ่มข้อมูลนักเรียนเรียบร้อย"]);
         } else {
-            echo json_encode(["success" => true, "data" => $result]);
+            echo json_encode(["success" => false, "message" => "ไม่สามารถเพิ่มข้อมูลได้"]);
         }
     }
 
-    elseif ($method === "DELETE") {
-        // ✅ ลบข้อมูลลูกค้าตาม student_id
+    // ✅ แก้ไขข้อมูลนักเรียน
+    elseif ($method === "PUT") {
         $data = json_decode(file_get_contents("php://input"), true);
 
-        // ตรวจสอบการส่ง student_id
         if (!isset($data["student_id"])) {
             echo json_encode(["success" => false, "message" => "ไม่พบค่า student_id"]);
             exit;
@@ -33,22 +46,42 @@ try {
 
         $student_id = intval($data["student_id"]);
 
-        // ตรวจสอบว่า student_id มีอยู่ในฐานข้อมูล
-        $stmt_check = $conn->prepare("SELECT 1 FROM students WHERE student_id = :id");
-        $stmt_check->bindParam(":id", $student_id, PDO::PARAM_INT);
-        $stmt_check->execute();
+        $stmt = $conn->prepare("UPDATE students 
+                                SET first_name = :first_name, 
+                                    last_name = :last_name, 
+                                    email = :email, 
+                                    phone = :phone
+                                WHERE student_id = :id");
 
-        if ($stmt_check->rowCount() == 0) {
-            echo json_encode(["success" => false, "message" => "ไม่พบข้อมูล student_id ที่ต้องการลบ"]);
+        $stmt->bindParam(":first_name", $data["first_name"]);
+        $stmt->bindParam(":last_name", $data["last_name"]);
+        $stmt->bindParam(":email", $data["email"]);
+        $stmt->bindParam(":phone", $data["phone"]);
+        $stmt->bindParam(":id", $student_id, PDO::PARAM_INT);
+
+        if ($stmt->execute()) {
+            echo json_encode(["success" => true, "message" => "แก้ไขข้อมูลนักเรียนเรียบร้อย"]);
+        } else {
+            echo json_encode(["success" => false, "message" => "ไม่สามารถแก้ไขข้อมูลได้"]);
+        }
+    }
+
+    // ✅ ลบข้อมูลนักเรียน
+    elseif ($method === "DELETE") {
+        $data = json_decode(file_get_contents("php://input"), true);
+
+        if (!isset($data["student_id"])) {
+            echo json_encode(["success" => false, "message" => "ไม่พบค่า student_id"]);
             exit;
         }
 
-        // ลบข้อมูล
+        $student_id = intval($data["student_id"]);
+
         $stmt = $conn->prepare("DELETE FROM students WHERE student_id = :id");
         $stmt->bindParam(":id", $student_id, PDO::PARAM_INT);
 
         if ($stmt->execute()) {
-            echo json_encode(["success" => true, "message" => "ลบข้อมูลเรียบร้อย"]);
+            echo json_encode(["success" => true, "message" => "ลบข้อมูลนักเรียนเรียบร้อย"]);
         } else {
             echo json_encode(["success" => false, "message" => "ไม่สามารถลบข้อมูลได้"]);
         }
@@ -59,6 +92,6 @@ try {
     }
 
 } catch (Exception $e) {
-    echo json_encode(["success" => false, "message" => "เกิดข้อผิดพลาด: " . $e->getMessage()]);
+    echo json_encode(["success" => false, "message" => $e->getMessage()]);
 }
 ?>
