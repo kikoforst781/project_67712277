@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 03, 2025 at 08:21 PM
+-- Generation Time: Oct 17, 2025 at 08:36 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -47,6 +47,33 @@ INSERT INTO `customers` (`customer_id`, `firstName`, `lastName`, `phone`, `usern
 (4, 'มานะ', 'เด็กดี', '038756921', 'mana', '1234'),
 (5, 'มานี', 'ใจดี', '038756901', 'manee', '1234'),
 (6, 'Somchai', 'Wongdee', '0812345678', 'somchaiw', 'password123');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `employees`
+--
+
+CREATE TABLE `employees` (
+  `employees_id` int(11) NOT NULL,
+  `first_name` varchar(100) NOT NULL,
+  `last_name` varchar(100) NOT NULL,
+  `username` varchar(50) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `image` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `employees`
+--
+
+INSERT INTO `employees` (`employees_id`, `first_name`, `last_name`, `username`, `password`, `image`, `created_at`, `updated_at`) VALUES
+(5, 'Naruedech', 'Bunmak', 'Naruedech_1990', 'Naruedech_1990', '1760725376_พนักงานบริษัท.jpg', '2025-10-17 18:22:56', '2025-10-17 18:22:56'),
+(6, 'Somchai', 'Naruebordin', 'Naruebordin*78455', 'Naruebordin*78455', '1760725417_images.jfif', '2025-10-17 18:23:37', '2025-10-17 18:23:37'),
+(7, 'Weerawat', 'Kronpeecha', 'Weerawat_kpc', 'Weerawat_kpc', '1760725461_images (1).jfif', '2025-10-17 18:24:21', '2025-10-17 18:24:21'),
+(8, 'Anusit', 'Khumsub', 'AnusitKhumsub_495522', 'AnusitKhumsub_495522', '1760725502_images (2).jfif', '2025-10-17 18:25:02', '2025-10-17 18:25:02');
 
 -- --------------------------------------------------------
 
@@ -154,6 +181,13 @@ ALTER TABLE `customers`
   ADD PRIMARY KEY (`customer_id`);
 
 --
+-- Indexes for table `employees`
+--
+ALTER TABLE `employees`
+  ADD PRIMARY KEY (`employees_id`),
+  ADD UNIQUE KEY `username` (`username`);
+
+--
 -- Indexes for table `orderdetails`
 --
 ALTER TABLE `orderdetails`
@@ -192,6 +226,12 @@ ALTER TABLE `students`
 --
 ALTER TABLE `customers`
   MODIFY `customer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `employees`
+--
+ALTER TABLE `employees`
+  MODIFY `employees_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `orderdetails`
