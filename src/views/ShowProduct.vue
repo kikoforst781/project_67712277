@@ -1,14 +1,15 @@
 <template>
   <div class="container my-5">
     <h2 class="text-center mb-4">รายการสินค้า</h2>
-    <div class="row">
-      <div class="col-md-4" v-for="product in products" :key="product.id">
+    <div class="row"   >
+      <div class="col-md-3" v-for="product in products" :key="product.id">
         <div class="card shadow-sm mb-4">
-          <img :src="product.image" class="card-img-top" :alt="product.name">
+          <img :src="'http://localhost:8081/project_67712277/api_php/uploads/' + product.image" width="70%" height="300" 
+           class="card-img-top" :alt="product.name">
           <div class="card-body text-center">
-            <h5 class="card-title">{{ product.name }}</h5>
+            <h5 class="card-title">{{ product.product_name }}</h5>
             <p class="card-text">{{ product.price }} บาท</p>
-            <button class="btn btn-primary">รายละเอียด</button>
+            <button class="btn btn-primary">สั่งซื้อ</button>
           </div>
         </div>
       </div>
@@ -16,24 +17,55 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: "ShowProduct",
-  data() {
-    return {
-      products: [
-        { id: 1, name: "เตาไฟฟ้า", price: 1200, image: "https://imarflex.co.th/wp-content/uploads/2020/10/IF-404-4-scaled.jpg" },
-        { id: 2, name: "หม้อชาบู", price: 800, image: "https://shopmania.mcot.net/wp-content/uploads/2024/07/100.jpg" },
-        { id: 3, name: "ชุดช้อนส้อม", price: 250, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmtcpzwY3B518F9NECXbdOzR_nF9XL1ldh7Q&s" },
-        { id: 4, name: "เตาไฟฟ้า", price: 1200, image: "https://st.bigc-cs.com/cdn-cgi/image/format=webp,quality=90/public/media/catalog/product/34/88/8854336038334/8854336038334_1.jpg" },
-        { id: 5, name: "หม้อชาบู", price: 800, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9Ha5ugKRxr6VCQAu6gY9O4dRQX9E6JtXfXw&s" },
-        { id: 6, name: "ชุดช้อนส้อม", price: 250, image: "data:image/jpeg;base64,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" },
-      ]
-    }
-  }
-}
-</script>
+  
 
-<style lang="">
-    
-</style>
+<script>
+import { ref, onMounted } from "vue";
+
+export default {
+  name: "ProductList",
+  setup() {
+    const products = ref([]);
+    const loading = ref(true);
+    const error = ref(null);
+
+    // ฟังก์ชันดึงข้อมูลจาก API ด้วย GET
+    const fetchProducts = async () => {
+      try {
+        const response = await fetch("http://localhost:8081/project_67712277/api_php/show_product.php", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json"
+          }
+        });
+
+        if (!response.ok) {
+          throw new Error("ไม่สามารถดึงข้อมูลได้");
+        }
+
+        const result = await response.json();
+        if (result.success) {
+          products.value = result.data;
+        } else {
+          error.value = result.message;
+        }
+
+      } catch (err) {
+        error.value = err.message;
+      } finally {
+        loading.value = false;
+      }
+    };
+
+    onMounted(() => {
+      fetchProducts();
+    });
+
+    return {
+      products,
+      loading,
+      error
+    };
+  }
+};
+</script>

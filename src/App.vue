@@ -13,8 +13,14 @@
         <li class="nav-item">
           <a class="nav-link" href="/showproduct">Show Product</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/product">Product</a>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Product
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="/product">Product</a></li>
+            <li><a class="dropdown-item" href="/editproduct">Edit Product</a></li>
+          </ul>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -48,6 +54,9 @@
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/about">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/Employees">Employees</a>
         </li>
       </ul>
       <form class="d-flex" role="search">
